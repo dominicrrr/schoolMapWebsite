@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQLITE PIN WEBSITE</title>
+    <link rel="stylesheet" href="../static/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
+  </head>
+  <body>
+    <div class="saved-noti" id="saved-noti"><p>Saved Successfully!</p></div>
+    <ul class="nav-list">
+      <li id="ham-container" class="bar-buttons">
+        <input type="checkbox" id="openSidebarMenu" class="openSidebarMenu" />
+        <label for="openSidebarMenu" class="openSidebarMenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </label>
+        <div id="sidebarMenu">
+          <div class="innerMenu">
+            <div class="pin-button-container">
+              <ul class="pin-list">
+                <li class="pin-list-item">
+                  <input
+                    type="checkbox"
+                    class="pin-button"
+                    id="red-pin-button"
+                    value="1"
+                    onclick="onlyOne(this)"
+                    data-color="red"
+                  />
+                  <span class="pin-tooltip" id="red-button-tooltip">
+                    Fighting
+                  </span>
+                  <label for="red-pin-button"
+                    ><span class="pin">
+                      <img
+                        src="../static/images/pins/map-pin-icon.png"
+                        width="30"
+                        height="40"
+                        value="1"
+                        class="pin"
+                    /></span>
+                  </label>
+                </li>
+                <li class="pin-list-item">
+                  <input
+                    type="checkbox"
+                    class="pin-button"
+                    id="blue-pin-button"
+                    value="1"
+                    data-color="blue"
+                    onclick="onlyOne(this)"
+                  />
+                  <span class="pin-tooltip" id="blue-button-tooltip">
+                    Drugs
+                  </span>
+                  <label for="blue-pin-button"
+                    ><span class="pin">
+                      <img
+                        src="../static/images/pins/pin-blue.png"
+                        width="30"
+                        height="40"
+                        class="pin"
+                    /></span>
+                  </label>
+                </li>
+                <li class="pin-list-item">
+                  <input
+                    type="checkbox"
+                    class="pin-button"
+                    id="green-pin-button"
+                    value="1"
+                    data-color="green"
+                    onclick="onlyOne(this)"
+                  />
+                  <span class="pin-tooltip" id="green-button-tooltip">
+                    " "
+                  </span>
+                  <label for="green-pin-button"
+                    ><span class="pin">
+                      <img
+                        src="../static/images/pins/pin-green.png"
+                        width="30"
+                        height="40"
+                    /></span>
+                  </label>
+                </li>
+                <li class="pin-list-item">
+                  <input
+                    type="checkbox"
+                    class="pin-button"
+                    id="purple-pin-button"
+                    value="1"
+                    data-color="purple"
+                    onclick="onlyOne(this)"
+                  />
+                  <span class="pin-tooltip" id="purple-button-tooltip">
+                    " "
+                  </span>
+                  <label for="purple-pin-button">
+                    <span class="pin"
+                      ><img
+                        src="../static/images/pins/pin-purple.png"
+                        width="30"
+                        height="40"
+                    /></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <h3 id="so-cold">
+              No marker selected, please click on a placed marker to view
+              details
+            </h3>
+            <div class="pin-details" id="hide-me-pls">
+              <div class="pin-image-container">
+                <img
+                  src="../static/images/pins/map-pin-icon.png"
+                  width="125"
+                  height="175"
+                  id="pin-display"
+                />
+              </div>
+              <div class="add-info">
+                <form class="input buffer">
+                  <label class="input-buffer" for="select-incident"
+                    >Type of Incident</label
+                  >
+                  <select
+                    name="incidents"
+                    id="select-your-incident"
+                    onchange="create_incident()"
+                  >
+                    <option value="fighting">Fighting</option>
+                    <option value="drugs">Drugs</option>
+                    <option value="create">Create an Incident</option>
+                  </select>
+                </form>
+                <form class="create-input-group2">
+                  <label class="label2">Student id</label>
+                  <input
+                    autocomplete="off"
+                    name="name"
+                    id="studentId"
+                    class="input-butt2"
+                    value=""
+                    maxlength="5"
+                  />
+                </form>
+                <form class="create-input-group2">
+                  <label class="label2">Floor level</label>
+                  <input
+                    autocomplete="off"
+                    name="name"
+                    id="floor-level"
+                    class="input-butt2"
+                    disabled=""
+                    value=""
+                  />
+                </form>
+                <form class="create-input-group2">
+                  <label class="label2">Additional details</label>
+                  <input
+                    autocomplete="off"
+                    name="name"
+                    id="incident-details"
+                    class="input-butt2"
+                    value=""
+                  />
+                </form>
+                <button
+                  id="save-button"
+                  class="buttone-butt"
+                  onclick="saveDetails()"
+                >
+                  Save
+                </button>
+              </div>
+              <h3 id="marker-id-counter">No marker selected</h3>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="bar-buttons">
+        <button id="drop-pin" onclick="pin_drop()">Drop a pin</button>
+      </li>
+    </ul>
+    <div id = "info-button"><div id = "info-icon">
+      <svg  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+      viewBox="0 0 490.318 490.318"
+      xml:space="preserve">
+   <g>
+     <g>
+       <g>
+         <path d="M245.148,0C109.967,0,0.009,109.98,0.009,245.162c0,135.182,109.958,245.156,245.139,245.156
+           c135.186,0,245.162-109.978,245.162-245.156C490.31,109.98,380.333,0,245.148,0z M245.148,438.415
+           c-106.555,0-193.234-86.698-193.234-193.253c0-106.555,86.68-193.258,193.234-193.258c106.559,0,193.258,86.703,193.258,193.258
+           C438.406,351.717,351.706,438.415,245.148,438.415z"/>
+         <path d="M270.036,221.352h-49.771c-8.351,0-15.131,6.78-15.131,15.118v147.566c0,8.352,6.78,15.119,15.131,15.119h49.771
+           c8.351,0,15.131-6.77,15.131-15.119V236.471C285.167,228.133,278.387,221.352,270.036,221.352z"/>
+         <path d="M245.148,91.168c-24.48,0-44.336,19.855-44.336,44.336c0,24.484,19.855,44.34,44.336,44.34
+           c24.485,0,44.342-19.855,44.342-44.34C289.489,111.023,269.634,91.168,245.148,91.168z"/>
+       </g>
+     </g>
+   </g>
+   </svg></div>
+  </div>
+    <div id="map-buttons">
+        <button title="filter" class="filter" id="filter-btn" onclick="commitFilter()">
+          <svg viewBox="0 0 512 512" height="1em" id="filter-color">
+            <path
+              d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 
+              32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 
+              0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 
+              48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 
+              0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 
+              64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 
+              28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"
+            ></path>
+          </svg>
+        </button>
+        <div class="inputGroup" id="pos1">
+          <input type="text" required="" autocomplete="off" id = "map-view-selectRoot" value="SESSION VIEW">
+          <label for="name">View</label>
+          <div class="pin-view-dropdown">
+            <ul>
+              <li class="pin-view-dropdown-optionRoot">SESSION VIEW</li>
+              <li class="pin-view-dropdown-optionRoot">DATABASE VIEW</li>
+            </ul>
+          </div>
+        <!--a series of dropdown boxes side by side-->
+      </div>        
+    </div>
+    <div class="image-container">
+      <div id="map"></div>
+      <div id="marker-position"></div>
+    </div>
+    <div class="stat-container">
+      <table>
+        <tr>
+          <th>Student id</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Age</th>
+        </tr>
+  </tr>
+  {% for student in students %}
+  <tr>
+    <td>{{ student[0] }}</td> <!-- Assuming student[0] is the ID -->
+    <td>{{ student[1] }}</td> <!-- Assuming student[1] is the first name -->
+    <td>{{ student[2] }}</td> <!-- Assuming student[2] is the last name -->
+    <td>{{ student[3] }}</td> <!-- Assuming student[3] is the age -->
+  </tr>
+  {% endfor %}
+      </table>
+      <button id="commit button" onclick=masterDataAdjust(true,false,false)>COMMIT INTO DATABASE</button>
+    </div>
+    <div class="blur-background" id="bg-blur-menu">
+      <div id="create-incident-menu">
+        <button
+          id="close-button"
+          class="close-create-btn"
+          onclick="close_create_incident()"
+        >
+          <span class="close-bar" id="x1"></span>
+          <span class="close-bar" id="x2"></span>
+          <div class="close">Close</div>
+        </button>
+        <div class="incident-inputs">
+          <h2
+            id="create-in-text"
+            style="font-family: 'Libre Franklin'; text-align: center"
+          >
+            Create an incident
+          </h2>
+          <div id="create-in-pic">
+            <img
+              id="selected-input-pic"
+              src="../static/images/pins/map-pin-icon.png"
+              alt="Icon color"
+            />
+          </div>
+          <div class="contained-my-guy">
+            <h3 id="h3-color" style="font-family: 'Libre Franklin'">Color</h3>
+            <div class="radio-inputs" onchange="change_create_pic()">
+              <label class="radio">
+                <input type="radio" name="radio" checked="" id="red-checkie" />
+                <span class="name">Red</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="radio" id="blue-checkie" />
+                <span class="name">Blue</span>
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="radio" id="green-checkie" />
+                <span class="name">Green</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="radio" id="purple-checkie" />
+                <span class="name">Purple</span>
+              </label>
+            </div>
+          </div>
+          <div class="create-input-group">
+            <label class="label">New Incident</label>
+            <input
+              autocomplete="off"
+              name="name"
+              id="new-incident-input"
+              class="input-butt"
+              type="new-incident"
+            />
+            <div></div>
+          </div>
+
+          <button id="bottone5" class="buttone-butt" onclick="save_incident()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="../static/script.js"></script>
+  </body>
+</html>
