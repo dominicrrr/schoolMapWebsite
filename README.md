@@ -1,1 +1,3 @@
-# School data management website
+# React 
+
+React implementaion of the School Map Website.
