@@ -1,0 +1,36 @@
+/* nav-bar.css */
+.navbar { 
+    /* background-color: orange; */
+    margin: 0;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-color: rgb(228, 231, 236);
+    border-style: solid;
+}
+
+.padding-navbar{ 
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /* background-color: blue; */
+}
+
+.content-wrapper-nav {
+    width: 100%;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    display: flex;
+    position: relative;
+    justify-content: space-between; /* Space between left and right content */
+}
+
+.right-content-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Ensures content aligns to the right */
+}
+
+.nav-content-links {
+    gap: 0.625rem; /* Replacing grid-row-gap and grid-column-gap with gap */
+    display: flex;
+}

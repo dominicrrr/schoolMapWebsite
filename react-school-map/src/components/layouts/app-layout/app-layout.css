@@ -1,0 +1,22 @@
+.app-view {
+    margin: 0;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+}
+
+.app-flex-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-container {
+    width: 30%; /* Takes up 30% of the space */
+    height: 100%;
+}
+
+.map-container {
+    width: 70%; /* Takes up remaining 70% of the space */
+    height: 100%;
+}

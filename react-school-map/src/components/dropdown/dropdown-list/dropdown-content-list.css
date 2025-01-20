@@ -1,0 +1,33 @@
+.content-list-item-entry {
+    grid-column-gap: .5rem;
+    grid-row-gap: .5rem;
+    color: var(--heading-text);
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 1px solid #0000;
+    border-radius: .5rem;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .75rem 1rem;
+    font-size: .875rem;
+    font-weight: 500;
+    display: flex;
+    transition: var(--hover-transiton);
+}
+
+.content-list-item-text-wrapper {
+    grid-column-gap: .25rem;
+    grid-row-gap: .25rem;
+    flex-flow: column;
+    display: flex;
+    white-space: nowrap; /* Add this line */
+}
+.content-list-item-text-wrapper.horizontal { 
+    flex-flow: row;
+}
+
+.content-list-item-text-wrapper:hover { 
+    color: orange;
+    background-color: var(--light-btn-hover); /* invisible to light mode users but should work for dark mode */
+}

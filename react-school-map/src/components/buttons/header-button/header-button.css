@@ -1,0 +1,24 @@
+.header-button{
+ border-radius: .5rem;
+ display: flex;
+ justify-content: space-between;
+ cursor: pointer;   
+ font-weight: 500;
+ padding: .75rem 1rem;
+ user-select: none; /* Prevent text selection */
+ transition: var(--hover-transiton);
+ text-decoration: none; /* Removes underline */
+ color: inherit; /* Inherits color from parent or set your own */
+}
+
+.header-button:hover {
+    background-color: var(--light-btn-hover);
+}
+
+.header-button.active {
+    background-color: var(--primary-active);
+}
+
+.header-button.active:hover { 
+    background: var(--secondary-active);
+}
