@@ -1,0 +1,9 @@
+.date-picker-view{
+    display: flex;
+    flex-direction: column;
+}
+
+.date-picker-content{
+    display: flex;
+    flex-direction: row;
+}

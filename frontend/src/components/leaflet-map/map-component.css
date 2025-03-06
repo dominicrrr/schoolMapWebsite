@@ -1,0 +1,50 @@
+/* map-component.css */
+.map-comp-wrapper {
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    width: 100%;
+}
+
+.map-container {
+    width: 100%;
+}
+
+#map {
+    height: 35rem;
+    width: 100%;
+}
+
+#map.active {
+    cursor: crosshair;
+}
+
+.map-buttons-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* This will push left and right sections apart */
+    padding: 1rem;
+    width: 100%;
+}
+
+.map-buttons-row-left {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.map-buttons-row-right {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-right: 1rem; /* im angry */
+    align-items: center;
+}
+
+.map-overlay-buttons{ 
+    position: absolute;
+    z-index: 999;
+    padding: 5rem .5rem;
+    top:6rem;
+}

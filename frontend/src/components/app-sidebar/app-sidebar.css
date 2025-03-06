@@ -1,0 +1,50 @@
+.app-sidebar { 
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    background-color: lightblue;
+}
+
+.app-sidebar-icon-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the column fills the height of the parent */
+    background-color: lightcoral;
+    width: fit-content;
+}
+
+.app-sidebar-icon-column-padding { 
+    display: flex; /* Add flex for proper alignment */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensure it spans the column width */
+    padding: .5rem;
+    background-color: rgba(76, 47, 134, 0.731);
+    width:auto;
+}
+
+.app-sidebar-icon-column-content { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 1.5rem; /* Combined column and row gaps */
+}
+
+.app-sidebar-icon-column-item {
+    text-align: center; /* Optional: for text alignment within items */
+}
+
+.app-sidebar-content-wrapper {
+    padding: 1rem;
+}
+
+.pin-details-view { 
+    display: flex;
+    direction: column;
+    
+}
